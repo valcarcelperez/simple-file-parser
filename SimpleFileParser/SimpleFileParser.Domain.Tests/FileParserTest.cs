@@ -19,7 +19,7 @@ namespace SimpleFileParser.Domain.Tests
             _testFilesFolder = Path.Combine(_testFilesFolder, "TestFiles");
 
             _printer = new FakePrinter();
-            var config = new FileParserConfig();
+            var config = new FileParserConfig { Delimiter = ',', TargetField = 3, ExpectedFieldCount = 5 };
             _target = new FileParser(_printer, config);
         }
 
