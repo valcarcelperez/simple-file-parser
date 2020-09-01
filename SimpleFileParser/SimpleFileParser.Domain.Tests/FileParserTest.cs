@@ -19,7 +19,7 @@ namespace SimpleFileParser.Domain.Tests
             _testFilesFolder = Path.Combine(_testFilesFolder, "TestFiles");
 
             _printer = new FakePrinter();
-            _target = new FileParser();
+            _target = new FileParser(_printer);
         }
 
         [TestMethod]
@@ -44,8 +44,13 @@ namespace SimpleFileParser.Domain.Tests
         }
     }
 
-    public class FakePrinter
+    public class FakePrinter : IPrinter
     {
         public List<string> PrintedValues { get; } = new List<string>();
+
+        public void Print(string text)
+        {
+            PrintedValues.Add(text);
+        }
     }
 }
