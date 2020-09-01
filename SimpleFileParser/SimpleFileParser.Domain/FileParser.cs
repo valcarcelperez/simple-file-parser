@@ -32,9 +32,16 @@ namespace SimpleFileParser.Domain
                 using (var reader = new StreamReader(path))
                 {
                     string line = reader.ReadLine();
+                    var lineCount = 0;
                     while (line != null)
                     {
-                        ParseLine(line);
+                        lineCount++;
+                        var isValidLine = ParseLine(line, lineCount);
+                        if (!isValidLine)
+                        {
+                            return;
+                        }   
+                        
                         line = reader.ReadLine();
                     }
                 }
@@ -45,10 +52,17 @@ namespace SimpleFileParser.Domain
             }
         }
 
-        private void ParseLine(string line)
+        private bool ParseLine(string line, int lineNumber)
         {
             var fields = line.Split(_config.Delimiter);
+            if (fields.Length < _config.ExpectedFieldCount)
+            {
+                _printer.Print($"Line #{lineNumber} is incomplete");
+                return false;
+            }
+
             _printer.Print(fields[_config.TargetField]);
+            return true;
         }
     }
 }
