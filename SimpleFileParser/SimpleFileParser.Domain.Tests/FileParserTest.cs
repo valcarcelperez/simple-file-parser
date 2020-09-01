@@ -19,7 +19,8 @@ namespace SimpleFileParser.Domain.Tests
             _testFilesFolder = Path.Combine(_testFilesFolder, "TestFiles");
 
             _printer = new FakePrinter();
-            _target = new FileParser(_printer);
+            var config = new FileParserConfig();
+            _target = new FileParser(_printer, config);
         }
 
         [TestMethod]
