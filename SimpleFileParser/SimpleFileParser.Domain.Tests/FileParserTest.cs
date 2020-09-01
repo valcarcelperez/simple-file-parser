@@ -41,7 +41,7 @@ namespace SimpleFileParser.Domain.Tests
             _target.Parse(path);
 
             Assert.AreEqual(1, _printer.PrintedValues.Count);
-            Assert.AreEqual("File 'a-file-that-does-not-exist.csv' not found", _printer.PrintedValues[0]);
+            Assert.AreEqual($"File '{path}' not found", _printer.PrintedValues[0]);
         }
     }
 

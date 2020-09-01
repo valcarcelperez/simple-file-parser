@@ -1,4 +1,6 @@
-﻿namespace SimpleFileParser.Domain
+﻿using System.IO;
+
+namespace SimpleFileParser.Domain
 {
 
     public class FileParser
@@ -14,6 +16,10 @@
 
         public void Parse(string path)
         {
+            if (!File.Exists(path))
+            {
+                _printer.Print($"File '{path}' not found");
+            }
         }
     }
 }
