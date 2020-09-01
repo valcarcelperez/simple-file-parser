@@ -45,6 +45,17 @@ namespace SimpleFileParser.Domain.Tests
             Assert.AreEqual(1, _printer.PrintedValues.Count);
             Assert.AreEqual($"File '{path}' not found", _printer.PrintedValues[0]);
         }
+
+        [TestMethod]
+        public void Given_an_incomplete_line_in_the_file_Should_exit_immediately()
+        {
+            var path = Path.Combine(_testFilesFolder, "invalid-file-incomplete-line.csv");
+            _target.Parse(path);
+
+            Assert.AreEqual(2, _printer.PrintedValues.Count);
+            Assert.AreEqual("first", _printer.PrintedValues[0]);
+            Assert.AreEqual("Line #2 is incomplete", _printer.PrintedValues[1]);
+        }
     }
 
     public class FakePrinter : IPrinter
