@@ -12,13 +12,15 @@ namespace SimpleFileParser.Domain.Tests
         private FakePrinter _printer;
         private string _testFilesFolder;
 
+        public TestContext TestContext { get; set; }
+
         [TestInitialize]
         public void Initialize()
         {
             _testFilesFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _testFilesFolder = Path.Combine(_testFilesFolder, "TestFiles");
 
-            _printer = new FakePrinter();
+            _printer = new FakePrinter(TestContext);
             var config = new FileParserConfig { Delimiter = ',', TargetField = 3, ExpectedFieldCount = 5 };
             _target = new FileParser(_printer, config);
         }
@@ -47,11 +49,19 @@ namespace SimpleFileParser.Domain.Tests
 
     public class FakePrinter : IPrinter
     {
+        private TestContext _testContext;
+
         public List<string> PrintedValues { get; } = new List<string>();
+
+        public FakePrinter(TestContext testContext)
+        {
+            _testContext = testContext;
+        }
 
         public void Print(string text)
         {
             PrintedValues.Add(text);
+            _testContext.WriteLine($"Printed: {text}");
         }
     }
 }
