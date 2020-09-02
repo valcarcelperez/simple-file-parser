@@ -62,6 +62,11 @@ namespace SimpleFileParser.Domain
             }
 
             _printer.Print(fields[_config.TargetField]);
+            if (fields.Length > _config.ExpectedFieldCount)
+            {
+                _printer.Print($"WARN: Line #{lineNumber} has extra fields");
+            }
+
             return true;
         }
     }
