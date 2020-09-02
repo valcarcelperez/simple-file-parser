@@ -56,6 +56,21 @@ namespace SimpleFileParser.Domain.Tests
             Assert.AreEqual("first", _printer.PrintedValues[0]);
             Assert.AreEqual("Line #2 is incomplete", _printer.PrintedValues[1]);
         }
+
+        [TestMethod]
+        public void Given_a_file_with_extra_fields_Should_print_warnings()
+        {
+            var path = Path.Combine(_testFilesFolder, "valid-file-with-extra-fields.csv");
+            _target.Parse(path);
+
+            Assert.AreEqual(6, _printer.PrintedValues.Count);
+            Assert.AreEqual("first", _printer.PrintedValues[0]);
+            Assert.AreEqual("line", _printer.PrintedValues[1]);
+            Assert.AreEqual("WARN: Line #2 has extra fields", _printer.PrintedValues[2]);
+            Assert.AreEqual("awesome", _printer.PrintedValues[3]);
+            Assert.AreEqual("line", _printer.PrintedValues[4]);
+            Assert.AreEqual("WARN: Line #4 has extra fields", _printer.PrintedValues[5]);
+        }
     }
 
     public class FakePrinter : IPrinter

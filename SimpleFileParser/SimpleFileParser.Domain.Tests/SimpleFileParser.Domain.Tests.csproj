@@ -21,6 +21,9 @@
     <None Update="TestFiles\invalid-file-incomplete-line.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestFiles\valid-file-with-extra-fields.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\valid-file.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
