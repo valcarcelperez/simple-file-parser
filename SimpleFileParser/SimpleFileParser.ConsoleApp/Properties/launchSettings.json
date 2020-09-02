@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SimpleFileParser.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\Repos\\GitHub\\simple-file-parser\\SimpleFileParser\\SimpleFileParser.Domain.Tests\\TestFiles\\valid-file-with-extra-fields.csv"
+    }
+  }
+}
